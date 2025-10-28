@@ -4,176 +4,174 @@
 <meta charset="UTF-8">
 <title>Marie-Hélène vous souhaite la bienvenue — Mécanique Orbitale et Lecture Vocale</title>
 <style>
-  /* Ajout de la police Space Mono */
-  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+ /* Ajout de la police Space Mono */
+ @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
-  body { 
-    background: black; 
-    color: #00FF9C; 
-    /* Changement de police */
-    font-family: 'Space Mono', monospace; 
-    text-align: center; 
-    margin: 0;
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    min-height: 100vh; 
-    position: relative; 
-  }
-  h2 {
-    color: #00FF9C;
-    text-shadow: 0 0 10px #00FF9C;
-    padding: 15px;
-    background: rgba(0, 20, 0, 0.6);
-    border-bottom: 2px solid #00FF9C;
-    letter-spacing: 3px;
-    margin-bottom: 0;
-    width: 100%; 
-    box-sizing: border-box; 
-  }
-  /* Conteneur Flex pour aligner Canvas et Console côte à côte */
-  .main-content {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start; /* Alignement en haut */
-    margin-top: 20px;
-  }
-  .left-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  .controls {
-    margin-bottom: 10px; 
-    padding: 10px;
-    border: 1px dashed #00FF9C;
-    border-radius: 5px;
-    width: 780px; /* Aligné avec la largeur du canvas */
-    box-sizing: border-box;
-  }
-  button {
-    background: #001100;
-    color: #00FF9C;
-    border: 1px solid #00FF9C;
-    border-radius: 6px;
-    padding: 8px 14px;
-    margin: 5px;
-    font-family: inherit;
-    cursor: pointer;
-    transition: 0.2s;
-  }
-  button:hover {
-    background: #002200;
-    box-shadow: 0 0 8px #00FF9C;
-  }
-  canvas { 
-    background: black; 
-    border: 1px solid #555; 
-    cursor: grab; 
-  }
-  canvas.grabbing {
-    cursor: grabbing;
-  }
-  /* Console à droite */
-  .info-console { 
-    width: 350px; 
-    height: 600px; /* Même hauteur que le canvas */
-    background: #0c0c0c;
-    border: 2px solid #00FF9C;
-    border-radius: 10px;
-    box-shadow: 0 0 15px #00FF9C;
-    padding: 15px;
-    text-align: left;
-    font-size: 14px;
-    overflow-y: auto;
-    color: #00FF9C;
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    z-index: 10; 
-  }
-
-  /* CURSEUR CLIGNOTANT */
-  .info-console pre::after {
-      content: '_';
-      animation: blink 0.7s infinite;
-  }
-  @keyframes blink {
-      0% { opacity: 1; }
-      50% { opacity: 0; }
-      100% { opacity: 1; }
-  }
-  /* FIN CURSEUR CLIGNOTANT */
-
-  .info-console pre {
-      margin: 0;
-      white-space: pre-wrap; 
-      word-wrap: break-word; 
-  }
-  .console-title {
-      font-weight: bold;
-      color: #FFAA00; 
-      text-align: center;
-      margin-bottom: 10px;
-      padding-bottom: 5px;
-      border-bottom: 1px dashed #00FF9C;
-  }
-  .status-text {
-    font-size: 14px;
-    color: #FFAA00;
-    margin-top: 10px;
-    padding: 4px 8px;
-    border: 1px solid #FFAA00;
-    border-radius: 4px;
-    align-self: flex-start;
-    margin-left: 10px;
-  }
-  .moon-graphic {
-      font-size: 10px;
-      margin: 10px auto;
-      text-align: center;
-      color: #999;
-  }
-  /* Zone d'affichage du texte de la voix dans le coin inférieur droit */
-  #speechDisplay {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.8);
-      border: 1px solid #00FF9C;
-      color: #FFD700;
-      padding: 8px 12px;
-      border-radius: 5px;
-      font-size: 14px;
-      max-width: 400px;
-      text-align: left;
-      opacity: 0; /* Caché par défaut */
-      transition: opacity 0.5s;
-      z-index: 20;
-      font-family: 'Space Mono', monospace;
-  }
+ body { 
+ background: black; 
+ color: #00FF9C; 
+ /* Changement de police */
+ font-family: 'Space Mono', monospace; 
+ text-align: center; 
+ margin: 0;
+ display: flex; 
+ flex-direction: column; 
+ align-items: center; 
+ min-height: 100vh; 
+ position: relative; 
+ }
+ h2 {
+ color: #00FF9C;
+ text-shadow: 0 0 10px #00FF9C;
+ padding: 15px;
+ background: rgba(0, 20, 0, 0.6);
+ border-bottom: 2px solid #00FF9C;
+ letter-spacing: 3px;
+ margin-bottom: 0;
+ width: 100%; 
+ box-sizing: border-box; 
+ }
+ /* Conteneur Flex pour aligner Canvas et Console côte à côte */
+ .main-content {
+ display: flex;
+ gap: 20px;
+ align-items: flex-start; /* Alignement en haut */
+ margin-top: 20px;
+ }
+ .left-panel {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 20px;
+ }
+ .controls {
+ margin-bottom: 10px; 
+ padding: 10px;
+ border: 1px dashed #00FF9C;
+ border-radius: 5px;
+ width: 780px; /* Aligné avec la largeur du canvas */
+ box-sizing: border-box;
+ }
+ button {
+ background: #001100;
+ color: #00FF9C;
+ border: 1px solid #00FF9C;
+ border-radius: 6px;
+ padding: 8px 14px;
+ margin: 5px;
+ font-family: inherit;
+ cursor: pointer;
+ transition: 0.2s;
+ }
+ button:hover {
+ background: #002200;
+ box-shadow: 0 0 8px #00FF9C;
+ }
+ canvas { 
+ background: black; 
+ border: 1px solid #555; 
+ cursor: grab; 
+ }
+ canvas.grabbing {
+ cursor: grabbing;
+ }
+ /* Console à droite */
+ .info-console { 
+ width: 350px; 
+ height: 600px; /* Même hauteur que le canvas */
+ background: #0c0c0c;
+ border: 2px solid #00FF9C;
+ border-radius: 10px;
+ box-shadow: 0 0 15px #00FF9C;
+ padding: 15px;
+ text-align: left;
+ font-size: 14px;
+ overflow-y: auto;
+ color: #00FF9C;
+ line-height: 1.6;
+ display: flex;
+ flex-direction: column;
+ z-index: 10; 
+ }
+ /* CURSEUR CLIGNOTANT */
+ .info-console pre::after {
+ content: '_';
+ animation: blink 0.7s infinite;
+ }
+ @keyframes blink {
+ 0% { opacity: 1; }
+ 50% { opacity: 0; }
+ 100% { opacity: 1; }
+ }
+ /* FIN CURSEUR CLIGNOTANT */
+ .info-console pre {
+ margin: 0;
+ white-space: pre-wrap; 
+ word-wrap: break-word; 
+ }
+ .console-title {
+ font-weight: bold;
+ color: #FFAA00; 
+ text-align: center;
+ margin-bottom: 10px;
+ padding-bottom: 5px;
+ border-bottom: 1px dashed #00FF9C;
+ }
+ .status-text {
+ font-size: 14px;
+ color: #FFAA00;
+ margin-top: 10px;
+ padding: 4px 8px;
+ border: 1px solid #FFAA00;
+ border-radius: 4px;
+ align-self: flex-start;
+ margin-left: 10px;
+ }
+ .moon-graphic {
+ font-size: 10px;
+ margin: 10px auto;
+ text-align: center;
+ color: #999;
+ }
+ /* Zone d'affichage du texte de la voix dans le coin inférieur droit */
+ #speechDisplay {
+ position: absolute;
+ bottom: 10px;
+ right: 10px;
+ background: rgba(0, 0, 0, 0.8);
+ border: 1px solid #00FF9C;
+ color: #FFD700;
+ padding: 8px 12px;
+ border-radius: 5px;
+ font-size: 14px;
+ max-width: 400px;
+ text-align: left;
+ opacity: 0; /* Caché par défaut */
+ transition: opacity 0.5s;
+ z-index: 20;
+ font-family: 'Space Mono', monospace;
+ }
 </style>
 </head>
 <body>
 <h2>Système Solaire — Mécanique Orbitale et Console d'Information</h2>
 
 <div class="main-content">
-    <div class="left-panel">
-        <div class="controls">
-          <button id="toggleBtn"> DÉMARRER</button>
-          <button id="speedBtn"> VITESSE ×0.1</button>
-          <button id="zoomBtn"> ZOOM: INTÉRIEUR</button>
-          <button id="resetPanBtn"> ↺ RÉINITIALISER VUE</button>
-        </div>
-        <canvas id="canvas" width="800" height="600"></canvas>
-        <span id="systemStatus" class="status-text">ÉTAT DU SYSTÈME: VUE INTÉRIEURE</span>
-    </div>
-    
-    <div class="info-console" id="infoConsole">
-        <div class="console-title">DONNÉES ORBITALES</div>
-        <pre id="consoleOutput"></pre>
-    </div>
+ <div class="left-panel">
+ <div class="controls">
+ <button id="toggleBtn"> DÉMARRER</button>
+ <button id="speedBtn"> VITESSE ×0.1</button>
+ <button id="zoomBtn"> ZOOM: INTÉRIEUR</button>
+ <button id="resetPanBtn"> ↺ RÉINITIALISER VUE</button>
+ </div>
+ <canvas id="canvas" width="800" height="600"></canvas>
+ <span id="systemStatus" class="status-text">ÉTAT DU SYSTÈME: VUE INTÉRIEURE</span>
+ </div>
+ 
+ <div class="info-console" id="infoConsole">
+ <div class="console-title">DONNÉES ORBITALES</div>
+ <pre id="consoleOutput"></pre>
+ </div>
 </div>
 
 <div id="speechDisplay"></div> <audio id="rogerSound" src="https://www.soundjay.com/communication/radio-chatter-1.mp3" preload="auto"></audio> 
@@ -202,11 +200,11 @@ const synth = window.speechSynthesis;
 let utterance = null;
 let maleVoice = null; 
 window.speechSynthesis.onvoiceschanged = () => {
-    const voices = synth.getVoices();
-    maleVoice = voices.find(voice => 
-        voice.lang.startsWith('fr') && 
-        (voice.name.toLowerCase().includes('male') || voice.name.includes('Thibault') || voice.name.includes('Thomas') || voice.default)
-    );
+ const voices = synth.getVoices();
+ maleVoice = voices.find(voice => 
+ voice.lang.startsWith('fr') && 
+ (voice.name.toLowerCase().includes('male') || voice.name.includes('Thibault') || voice.name.includes('Thomas') || voice.default)
+ );
 };
 // --- End Speech Setup ---
 
@@ -239,10 +237,10 @@ const MOON_START_ANGLE = (Math.PI / 2) - (2 * Math.PI / 12);
 const MOON_SPEED_MULTIPLIER = -1; // Sens horaire (par défaut c'est anti-horaire)
 
 let theta = { 
-  mercure: 0, venus: 0, terre: 0, mars: 0, jupiter: 0, uranus: 0, neptune: 0, 
-  lune: MOON_START_ANGLE, 
-  atlas: -Math.PI / 8, 
-  neowise: Math.PI / 4 
+ mercure: 0, venus: 0, terre: 0, mars: 0, jupiter: 0, uranus: 0, neptune: 0, 
+ lune: MOON_START_ANGLE, 
+ atlas: -Math.PI / 8, 
+ neowise: Math.PI / 4 
 }; 
 
 let targetZoomScale = 1.0; 
@@ -257,9 +255,9 @@ let terreOriginalX = 0;
 let terreOriginalY = 0;
 
 const zoomLevels = [
-    { scale: 1.0, name: "INTÉRIEUR", status: "VUE INTÉRIEURE" }, 
-    { scale: 0.2, name: "COMPLET", status: "VUE COMPLÈTE DU SYSTÈME" },     
-    { scale: 3.0, name: "GROS PLAN", status: "VUE RAPPROCHÉE" }     
+ { scale: 1.0, name: "INTÉRIEUR", status: "VUE INTÉRIEURE" }, 
+ { scale: 0.2, name: "COMPLET", status: "VUE COMPLÈTE DU SYSTÈME" }, 
+ { scale: 3.0, name: "GROS PLAN", status: "VUE RAPPROCHÉE" } 
 ];
 let currentZoomIndex = 0;
 
@@ -271,15 +269,15 @@ const baseSpeed = { mercure: 0.05, venus: 0.035, terre: 0.025, mars: 0.02, jupit
 
 const scaleFactor = (canvasWidth / 900) * 1.1; 
 const planetsData = { 
-  mercure: { a: 60 * scaleFactor, b: 50 * scaleFactor, color: "gray", size: 5, realDistanceAU: 0.39, label: "Mercure" }, 
-  venus:   { a: 90 * scaleFactor, b: 80 * scaleFactor, color: "yellow", size: 8, realDistanceAU: 0.72, label: "Vénus" },
-  terre:   { a:130 * scaleFactor, b:120 * scaleFactor, color: "#00BFFF", size:10, realDistanceAU: 1.00, label: "Terre", period: 1.0, moon: true, centerZoomScale: 3.0, centerZoomIndex: 2 }, 
-  mars:    { a:180 * scaleFactor, b:160 * scaleFactor, color: "red", size: 9, realDistanceAU: 1.52, label: "Mars" },
-  jupiter: { a:250 * scaleFactor, b:220 * scaleFactor, color: "beige", size:15, realDistanceAU: 5.20, label: "Jupiter" },
-  uranus:  { a:300 * scaleFactor, b:280 * scaleFactor, color: "#ADD8E6", size:12, realDistanceAU: 19.2, label: "Uranus" },
-  neptune: { a:350 * scaleFactor, b:330 * scaleFactor, color: "blue", size:11, realDistanceAU: 30.1, label: "Neptune" },
-  atlas:   { a: 160 * scaleFactor, b: 160 * scaleFactor, color: "#32CD32", size: 6, realDistanceAU: 1.4, label: "3I/ATLAS", isComet: true, centerZoomScale: 3.0, centerZoomIndex: 2, hyperbolic: true },
-  neowise: { a: 400 * scaleFactor, b: 300 * scaleFactor, color: "#FFD700", size: 8, realDistanceAU: 4.0, label: "C/2020 NEOWISE", isComet: true, centerZoomScale: 0.8, centerZoomIndex: 0 }
+ mercure: { a: 60 * scaleFactor, b: 50 * scaleFactor, color: "gray", size: 5, realDistanceAU: 0.39, label: "Mercure" }, 
+ venus: { a: 90 * scaleFactor, b: 80 * scaleFactor, color: "yellow", size: 8, realDistanceAU: 0.72, label: "Vénus" },
+ terre: { a:130 * scaleFactor, b:120 * scaleFactor, color: "#00BFFF", size:10, realDistanceAU: 1.00, label: "Terre", period: 1.0, moon: true, centerZoomScale: 3.0, centerZoomIndex: 2 }, 
+ mars: { a:180 * scaleFactor, b:160 * scaleFactor, color: "red", size: 9, realDistanceAU: 1.52, label: "Mars" },
+ jupiter: { a:250 * scaleFactor, b:220 * scaleFactor, color: "beige", size:15, realDistanceAU: 5.20, label: "Jupiter" },
+ uranus: { a:300 * scaleFactor, b:280 * scaleFactor, color: "#ADD8E6", size:12, realDistanceAU: 19.2, label: "Uranus" },
+ neptune: { a:350 * scaleFactor, b:330 * scaleFactor, color: "blue", size:11, realDistanceAU: 30.1, label: "Neptune" },
+ atlas: { a: 160 * scaleFactor, b: 160 * scaleFactor, color: "#32CD32", size: 6, realDistanceAU: 1.4, label: "3I/ATLAS", isComet: true, centerZoomScale: 3.0, centerZoomIndex: 2, hyperbolic: true },
+ neowise: { a: 400 * scaleFactor, b: 300 * scaleFactor, color: "#FFD700", size: 8, realDistanceAU: 4.0, label: "C/2020 NEOWISE", isComet: true, centerZoomScale: 0.8, centerZoomIndex: 0 }
 };
 const luneData = { size: 3, radius: 20 * scaleFactor, color: "#999999", realDistanceKM: 384400, orbitalPeriodDays: 27.3 }; 
 
@@ -304,43 +302,47 @@ const ATLAS_FULL_DESCRIPTION = `
 
 // --- Typewriter Effect Function ---
 function startTypewriter(rawText) {
-    if (typewriterInterval) clearInterval(typewriterInterval);
-    if (typewriterSound) {
-        typewriterSound.loop = true;
-        typewriterSound.volume = 0.3;
-        typewriterSound.play().catch(e => console.log("Typewriter sound start failed:", e));
-    }
-    const currentConsoleOutput = document.getElementById('consoleOutput');
-    if (!currentConsoleOutput) return;
-    currentConsoleOutput.textContent = ''; 
-    let i = 0;
-    const speed = 25; 
+ if (typewriterInterval) clearInterval(typewriterInterval);
+ if (typewriterSound) typewriterSound.pause();
+ 
+ const currentConsoleOutput = document.getElementById('consoleOutput');
+ if (!currentConsoleOutput) return;
+ 
+ currentConsoleOutput.textContent = ''; 
+ let i = 0;
+ const speed = 25; 
+ 
+ if (typewriterSound) {
+ typewriterSound.loop = true;
+ typewriterSound.volume = 0.3;
+ typewriterSound.play().catch(e => console.log("Typewriter sound start failed:", e));
+ }
 
-    typewriterInterval = setInterval(() => {
-        if (i < rawText.length) {
-            currentConsoleOutput.textContent += rawText.charAt(i);
-            i++;
-        } else {
-            clearInterval(typewriterInterval);
-            if (typewriterSound) typewriterSound.pause();
-            if (typewriterBeep) {
-                typewriterBeep.currentTime = 0;
-                typewriterBeep.volume = 0.5;
-                typewriterBeep.play().catch(e => console.log("Beep sound failed:", e));
-            }
-        }
-    }, speed);
+ typewriterInterval = setInterval(() => {
+ if (i < rawText.length) {
+ currentConsoleOutput.textContent += rawText.charAt(i);
+ i++;
+ } else {
+ clearInterval(typewriterInterval);
+ if (typewriterSound) typewriterSound.pause();
+ if (typewriterBeep) {
+ typewriterBeep.currentTime = 0;
+ typewriterBeep.volume = 0.5;
+ typewriterBeep.play().catch(e => console.log("Beep sound failed:", e));
+ }
+ }
+ }, speed);
 }
 
 // Function to generate the content string
 function generateConsoleContent(targetKey = null) {
-    const speedText = running ? `VITESSE: ×${globalSpeed.toFixed(1)}` : `VITESSE: ARRÊTÉE`;
-    const viewText = panIsActive ? "SUIVI" : (isDragging ? "PANNING MANUEL" : zoomLevels[currentZoomIndex].name);
+ const speedText = running ? `VITESSE: ×${globalSpeed.toFixed(1)}` : `VITESSE: ARRÊTÉE`;
+ const viewText = panIsActive ? "SUIVI" : (isDragging ? "PANNING MANUEL" : zoomLevels[currentZoomIndex].name);
 
-    let content = '';
+ let content = '';
 
-    if (targetKey === 'sun') {
-        content = `
+ if (targetKey === 'sun') {
+ content = `
 <div class="console-title">DONNÉES ORBITALES</div>
 <pre>
 > ÉTOILE: SOLEIL (SOL)
@@ -352,19 +354,17 @@ function generateConsoleContent(targetKey = null) {
 > VUE: ${viewText}
 </pre>
         `.trim();
-    }
-    else if (targetKey === 'atlas') {
-        // Utilisation de la description complète pour ATLAS
-        content = `
+ } else if (targetKey === 'atlas') {
+ // Utilisation de la description complète pour ATLAS
+ content = `
 <div class="console-title">DONNÉES ORBITALES</div>
 <pre>
 ${ATLAS_FULL_DESCRIPTION}
 </pre>
         `.trim();
-    }
-    else if (targetKey === 'neowise') {
-        const data = planetsData[targetKey];
-        content = `
+ } else if (targetKey === 'neowise') {
+ const data = planetsData[targetKey];
+ content = `
 <div class="console-title">DONNÉES ORBITALES</div>
 <pre>
 > OBJET: ${data.label.toUpperCase()}
@@ -376,11 +376,10 @@ ${ATLAS_FULL_DESCRIPTION}
 > NOTE: NEOWISE a été l'une des comètes les plus brillantes des dernières décennies.
 </pre>
         `.trim();
-    }
-    else if (targetKey === 'terre') {
-        const data = planetsData[targetKey];
-        const lune = luneData;
-        content = `
+ } else if (targetKey === 'terre') {
+ const data = planetsData[targetKey];
+ const lune = luneData;
+ content = `
 <div class="console-title">DONNÉES ORBITALES</div>
 <pre>
 > PLANÈTE: ${data.label.toUpperCase()}
@@ -393,20 +392,19 @@ ${ATLAS_FULL_DESCRIPTION}
 > ORBITE: ${lune.orbitalPeriodDays} jours terrestres
 > DISTANCE MOYENNE: ${lune.realDistanceKM.toLocaleString('fr-FR')} km
 <div class="moon-graphic">
-       . (LUNE)
-       / \
-      ( O ) <-- TERRE
-       \ /
-       ' 
+ . (LUNE)
+ / \
+ ( O ) <-- TERRE
+ \ /
+ '
 </div>
 > VECTEUR TANGENT: Affiché (T)
 </pre>
         `.trim();
-    }
-    else if (targetKey) {
-        const data = planetsData[targetKey];
-        if (data) {
-            content = `
+ } else if (targetKey) {
+ const data = planetsData[targetKey];
+ if (data) {
+ content = `
 <div class="console-title">DONNÉES ORBITALES</div>
 <pre>
 > PLANÈTE: ${data.label.toUpperCase()}
@@ -416,10 +414,10 @@ ${ATLAS_FULL_DESCRIPTION}
 > VECTEUR TANGENT: Affiché (T)
 </pre>
             `.trim();
-        }
-    } else {
-        // Default Console View
-        content = `
+ }
+ } else {
+ // Default Console View
+ content = `
 <div class="console-title">DONNÉES ORBITALES</div>
 <pre>
 > Système initialisé...
@@ -430,153 +428,719 @@ ${ATLAS_FULL_DESCRIPTION}
 > Survolez une planète ou le SOLEIL pour les détails.
 </pre>
         `.trim();
-        if (synth.speaking) {
-             synth.cancel();
-             speechDisplay.removeAttribute('data-looping');
-             hideSpeechDisplay(); // Cacher le texte s'il parle
-        }
-    }
-    return content;
+ if (synth.speaking) {
+ synth.cancel();
+ speechDisplay.removeAttribute('data-looping');
+ hideSpeechDisplay(); // Cacher le texte s'il parle
+ }
+ }
+ return content;
 }
 
 function updateInfoConsole(targetKey = null) {
-    const rawContent = generateConsoleContent(targetKey);
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = rawContent;
-    const preContent = tempDiv.querySelector('pre') ? tempDiv.querySelector('pre').innerHTML.trim() : "";
+ const rawContent = generateConsoleContent(targetKey);
+ 
+ const tempDiv = document.createElement('div');
+ tempDiv.innerHTML = rawContent;
+ const preContent = tempDiv.querySelector('pre') ? tempDiv.querySelector('pre').innerHTML.trim() : "";
 
-    const titlePart = rawContent.substring(0, rawContent.indexOf('<pre>'));
-    document.getElementById('infoConsole').innerHTML = titlePart + `<pre id="consoleOutput"></pre>`;
+ const titlePart = rawContent.substring(0, rawContent.indexOf('<pre>'));
+ document.getElementById('infoConsole').innerHTML = titlePart + `<pre id="consoleOutput"></pre>`;
 
-    startTypewriter(preContent);
+ startTypewriter(preContent);
 }
 
 function lerp(start, end, t) {
-    return start * (1 - t) + end * t;
+ return start * (1 - t) + end * t;
 }
 
 function initializeStars() {
-    const numStars = 500;
-    for (let i = 0; i < numStars; i++) {
-        let size;
-        const rand = Math.random();
-        if (rand < 0.7) {
-            size = 1.0; 
-        } else if (rand < 0.95) {
-            size = 1.5; 
-        } else {
-            size = 2.0; 
-        }
-        stars.push({
-            x: Math.random() * canvasWidth,
-            y: Math.random() * canvasHeight, 
-            size: size
-        });
-    }
+ const numStars = 500;
+ for (let i = 0; i < numStars; i++) {
+ let size;
+ const rand = Math.random();
+ if (rand < 0.7) {
+ size = 1.0; 
+ } else if (rand < 0.95) {
+ size = 1.5; 
+ } else {
+ size = 2.0; 
+ }
+ stars.push({
+ x: Math.random() * canvasWidth,
+ y: Math.random() * canvasHeight, 
+ size: size
+ });
+ }
 }
 
 function drawStars() {
-    ctx.fillStyle = "white";
-    stars.forEach(star => {
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size * 0.5, 0, Math.PI * 2);
-        ctx.fill();
-    });
+ ctx.fillStyle = "white";
+ stars.forEach(star => {
+ ctx.beginPath();
+ ctx.arc(star.x, star.y, star.size * 0.5, 0, Math.PI * 2);
+ ctx.fill();
+ });
 }
 
-
 function getPlanetCoords(key) {
-    const planet = planetsData[key];
-    const a = planet.a * currentZoomScale;
-    const b = planet.b * currentZoomScale;
-    
-    if (planet.isComet && planet.hyperbolic) {
-        // Trajectoire rectiligne entre Terre (1h) et Mars (5h)
-        // Distance pour passer entre les orbites de Terre et Mars
-        const earthAvgRadius = planetsData.terre.a * currentZoomScale;
-        const marsAvgRadius = planetsData.mars.a * currentZoomScale;
-        const r_avg = (earthAvgRadius + marsAvgRadius) / 2;
-        // La comète passe au plus près du Soleil au plus petit 'r'
-        const r_min = r_avg * 0.9;
-        // Coordonnées du point central de la ligne (au plus proche du soleil)
-        const centerAngle = Math.PI / 4; 
-        const closestX = r_min * Math.cos(centerAngle);
-        const closestY = r_min * Math.sin(centerAngle);
-        // Direction de la trajectoire (de 1h vers 5h -> angle de la ligne ~ 5*PI/6)
-        const lineAngle = 5 * Math.PI / 6; 
-        const distAlongLine = theta[key] * a * 2; 
-        // Position de la comète sur la ligne droite (passant par (closestX, closestY))
-        const orbitalX = closestX + distAlongLine * Math.cos(lineAngle);
-        const orbitalY = closestY + distAlongLine * Math.sin(lineAngle);
-        const x = BASE_CENTER_X + orbitalX - currentPanX; 
-        const y = BASE_CENTER_Y + orbitalY - currentPanY;
-        return { x, y, orbitalX, orbitalY, a, b, size: planet.size, lineAngle };
-    } else if (planet.isComet) {
-        // Trajectoire légèrement excentrique (pour NEOWISE)
-        const orbitalX = a * Math.cos(theta[key]) * 1.5;
-        const orbitalY = b * Math.sin(theta[key]) * 0.5;
-        const x = BASE_CENTER_X + orbitalX - currentPanX;
-        const y = BASE_CENTER_Y + orbitalY - currentPanY;
-        return { x, y, orbitalX, orbitalY, a, b, size: planet.size };
-    } else {
-        // Planètes normales
-        const orbitalX = a * Math.cos(theta[key]);
-        const orbitalY = b * Math.sin(theta[key]);
-        const x = BASE_CENTER_X + orbitalX - currentPanX;
-        const y = BASE_CENTER_Y + orbitalY - currentPanY;
-        return { x, y, orbitalX, orbitalY, a, b, size: planet.size };
-    }
+ const planet = planetsData[key];
+ const a = planet.a * currentZoomScale;
+ const b = planet.b * currentZoomScale;
+ 
+ if (planet.isComet && planet.hyperbolic) {
+ // Trajectoire rectiligne entre Terre (1h) et Mars (5h)
+ 
+ // Distance pour passer entre les orbites de Terre et Mars
+ const earthAvgRadius = planetsData.terre.a * currentZoomScale;
+ const marsAvgRadius = planetsData.mars.a * currentZoomScale;
+ const r_avg = (earthAvgRadius + marsAvgRadius) / 2;
+ 
+ // La comète passe au plus près du Soleil au plus petit 'r'
+ const r_min = r_avg * 0.9;
+ 
+ // Coordonnées du point central de la ligne (au plus proche du soleil)
+ const centerAngle = Math.PI / 4; 
+ const closestX = r_min * Math.cos(centerAngle);
+ const closestY = r_min * Math.sin(centerAngle);
+
+ // Direction de la trajectoire (de 1h vers 5h -> angle de la ligne ~ 5*PI/6)
+ const lineAngle = 5 * Math.PI / 6; 
+ 
+ const distAlongLine = theta[key] * a * 2; 
+
+ // Position de la comète sur la ligne droite (passant par (closestX, closestY))
+ const orbitalX = closestX + distAlongLine * Math.cos(lineAngle);
+ const orbitalY = closestY + distAlongLine * Math.sin(lineAngle);
+ 
+ 
+ const x = BASE_CENTER_X + orbitalX - currentPanX; 
+ const y = BASE_CENTER_Y + orbitalY - currentPanY;
+ 
+ return { x, y, orbitalX, orbitalY, a, b, size: planet.size, lineAngle };
+
+ } else if (planet.isComet) {
+ // Trajectoire légèrement excentrique (pour NEOWISE)
+ const orbitalX = a * Math.cos(theta[key]) * 1.5;
+ const orbitalY = b * Math.sin(theta[key]) * 0.5;
+ 
+ const x = BASE_CENTER_X + orbitalX - currentPanX;
+ const y = BASE_CENTER_Y + orbitalY - currentPanY;
+ 
+ return { x, y, orbitalX, orbitalY, a, b, size: planet.size };
+ 
+ } else {
+ // Planètes normales
+ const orbitalX = a * Math.cos(theta[key]);
+ const orbitalY = b * Math.sin(theta[key]);
+ 
+ const x = BASE_CENTER_X + orbitalX - currentPanX;
+ const y = BASE_CENTER_Y + orbitalY - currentPanY;
+ 
+ return { x, y, orbitalX, orbitalY, a, b, size: planet.size };
+ }
 }
 
 function drawTangent(key, x, y, orbitalX, orbitalY, lineAngle = null) {
-    // ... (Draws Tangent Vector T) ...
-    const planet = planetsData[key];
-    const a = planet.a * currentZoomScale;
-    const b = planet.b * currentZoomScale;
-    const t = theta[key];
-    const length = 20; 
-    // Calcul de la vitesse
-    let vx, vy;
-    if (planet.isComet && planet.hyperbolic) {
-        // Vitesse le long de l'angle de la ligne droite
-        vx = Math.cos(lineAngle); 
-        vy = Math.sin(lineAngle); 
-    } else if (planet.isComet) {
-        vx = -a * Math.sin(t) * 1.5;
-        vy = b * Math.cos(t) * 0.5;
-    } else {
-        vx = -a * Math.sin(t);
-        vy = b * Math.cos(t);
-    }
-    const magnitude = Math.hypot(vx, vy);
-    const nx = magnitude === 0 ? 0 : vx / magnitude;
-    const ny = magnitude === 0 ? 0 : vy / magnitude;
-    const tx = x + nx * length;
-    const ty = y + ny * length;
-    ctx.strokeStyle = "red";
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(tx, ty);
-    ctx.stroke();
-    // Changement de police ici
-    ctx.font = "14px 'Space Mono', Consolas";
-    ctx.fillStyle = "red";
-    ctx.textAlign = 'center'; 
-    ctx.fillText("T", tx + 8 * nx, ty + 8 * ny);
-    ctx.lineWidth = 1;
+ // ... (Draws Tangent Vector T) ...
+ const planet = planetsData[key];
+ const a = planet.a * currentZoomScale;
+ const b = planet.b * currentZoomScale;
+ const t = theta[key];
+ const length = 20; 
+ 
+ // Calcul de la vitesse
+ let vx, vy;
+ 
+ if (planet.isComet && planet.hyperbolic) {
+ // Vitesse le long de l'angle de la ligne droite
+ vx = Math.cos(lineAngle); 
+ vy = Math.sin(lineAngle); 
+ 
+ } else if (planet.isComet) {
+ vx = -a * Math.sin(t) * 1.5;
+ vy = b * Math.cos(t) * 0.5;
+ 
+ } else {
+ vx = -a * Math.sin(t);
+ vy = b * Math.cos(t);
+ }
+
+ const magnitude = Math.hypot(vx, vy);
+ const nx = magnitude === 0 ? 0 : vx / magnitude;
+ const ny = magnitude === 0 ? 0 : vy / magnitude;
+
+ const tx = x + nx * length;
+ const ty = y + ny * length;
+
+ ctx.strokeStyle = "red";
+ ctx.lineWidth = 2;
+ ctx.beginPath();
+ ctx.moveTo(x, y);
+ ctx.lineTo(tx, ty);
+ ctx.stroke();
+
+ // Changement de police ici
+ ctx.font = "14px 'Space Mono', Consolas";
+ ctx.fillStyle = "red";
+ ctx.textAlign = 'center'; 
+ ctx.fillText("T", tx + 8 * nx, ty + 8 * ny);
+ 
+ ctx.lineWidth = 1;
 }
+
 function showSpeechDisplay(text) {
-    speechDisplay.textContent = text;
-    speechDisplay.style.opacity = 1;
+ speechDisplay.textContent = text;
+ speechDisplay.style.opacity = 1;
 }
+
 function hideSpeechDisplay() {
-    // Ne pas cacher si nous sommes en mode "loop" pour le Soleil
-    if (!speechDisplay.getAttribute('data-looping')) {
-        speechDisplay.style.opacity = 0;
-    }
+ // Ne pas cacher si nous sommes en mode "loop" pour le Soleil
+ if (!speechDisplay.getAttribute('data-looping')) {
+ speechDisplay.style.opacity = 0;
+ }
 }
+
 function speakGreeting() {
-    // NOUVEAU TEXTE
-    const greetingText = "Marie-Hélène vous souhaite une très bonne journée. Merci. Je suis son assistante. Son email est mhstordeur@icloud.com si vous voulez apprendre à faire des animati
+ // NOUVEAU TEXTE
+ const greetingText = "Marie-Hélène vous souhaite une très bonne journée. Merci. Je suis son assistante. Son email est mhstordeur@icloud.com si vous voulez apprendre à faire des animations comme cela. Merci, moi je suis seulement son assistante.";
+ 
+ // Si la synthèse vocale est déjà en cours et qu'elle dit déjà ce message, on n'agit pas
+ if (synth.speaking && utterance && utterance.text === greetingText) {
+ return;
+ }
+ 
+ // Annuler la parole en cours 
+ if (synth.speaking) { synth.cancel(); }
+ 
+ showSpeechDisplay(greetingText);
+ speechDisplay.setAttribute('data-looping', 'true'); // Marqueur pour le mode boucle
+
+ utterance = new SpeechSynthesisUtterance(greetingText);
+ utterance.lang = 'fr-FR'; 
+ utterance.rate = 0.9; 
+ if (maleVoice) { utterance.voice = maleVoice; }
+ else { utterance.lang = 'fr-FR'; }
+ 
+ // RAPPEL DE LA FONCTION À LA FIN pour la boucle
+ utterance.onend = () => {
+ // Vérifie si le Soleil est toujours survolé avant de relancer
+ if (canvas.lastHitTarget === 'sun') {
+ speakGreeting(); // Rappel pour la boucle
+ } else {
+ speechDisplay.removeAttribute('data-looping');
+ hideSpeechDisplay();
+ }
+ };
+ 
+ synth.speak(utterance);
 }
+
+function speakData(planetKey) {
+ // S'assurer d'arrêter la boucle du Soleil si on commence à parler d'une planète
+ if (synth.speaking) { synth.cancel(); }
+ speechDisplay.removeAttribute('data-looping'); // Désactiver le mode boucle
+ hideSpeechDisplay(); 
+ 
+ const data = planetsData[planetKey];
+ let narrationText = '';
+
+ if (data) {
+ if (planetKey === 'atlas') {
+ narrationText = "Objet interstellaire 3I/ATLAS. Trajectoire hyperbolique. Pas de menace pour la Terre. Elle est actuellement entre Mars et la Terre.";
+ } else if (planetKey === 'neowise') {
+ narrationText = `Comète C/2020 NEOWISE. C'était l'une des comètes les plus brillantes observées.`;
+ } else {
+ narrationText = `Planète : ${data.label}. Distance : ${data.realDistanceAU} unités astronomiques, environ.`;
+ if (planetKey === 'terre') {
+ narrationText += ` Elle est bien sur son orbite. Elle possède un satellite naturel, la Lune.`;
+ }
+ }
+ narrationText += ` Vitesse de simulation : fois ${globalSpeed.toFixed(1)}.`;
+ 
+ showSpeechDisplay(narrationText);
+
+ utterance = new SpeechSynthesisUtterance(narrationText);
+ utterance.lang = 'fr-FR'; 
+ utterance.rate = 1.0; 
+
+ utterance.onend = hideSpeechDisplay;
+
+ synth.speak(utterance);
+ }
+}
+
+
+function drawOrbit(key, a, b) {
+ const planet = planetsData[key];
+
+ ctx.beginPath();
+ 
+ if (planet.isComet && planet.hyperbolic) {
+ // Trajectoire rectiligne ajustée pour ATLAS
+ const coords = getPlanetCoords(key); 
+ const lineAngle = coords.lineAngle;
+ 
+ // Point de passage le plus proche (centre de la ligne)
+ const r_avg = (planetsData.terre.a * currentZoomScale + planetsData.mars.a * currentZoomScale) / 2;
+ const centerAngle = Math.PI / 4; 
+ const closestX = r_avg * 0.9 * Math.cos(centerAngle);
+ const closestY = r_avg * 0.9 * Math.sin(centerAngle);
+
+ const lineLength = canvasWidth * 2;
+
+ // Calcul des extrémités de la ligne de la trajectoire
+ const startX = BASE_CENTER_X + (closestX - lineLength * Math.cos(lineAngle)) - currentPanX;
+ const startY = BASE_CENTER_Y + (closestY - lineLength * Math.sin(lineAngle)) - currentPanY;
+ 
+ const endX = BASE_CENTER_X + (closestX + lineLength * Math.cos(lineAngle)) - currentPanX;
+ const endY = BASE_CENTER_Y + (closestY + lineLength * Math.sin(lineAngle)) - currentPanY;
+
+ ctx.moveTo(startX, startY);
+ ctx.lineTo(endX, endY);
+ 
+ ctx.strokeStyle = "rgba(255, 255, 255, 0.7)"; 
+ ctx.lineWidth = 1;
+ } else if (planet.isComet) {
+ // Orbite excentrique pour NEOWISE
+ const angleEnd = 2 * Math.PI; 
+ for (let t = 0; t < angleEnd; t += 0.02) {
+ const x = BASE_CENTER_X + (a * 1.5) * Math.cos(t) - currentPanX;
+ const y = BASE_CENTER_Y + (b * 0.5) * Math.sin(t) - currentPanY;
+ ctx.lineTo(x, y);
+ }
+ ctx.strokeStyle = "rgba(255,255,0,0.4)"; 
+ ctx.lineWidth = 1;
+ } else {
+ // Planètes normales
+ const angleEnd = 2 * Math.PI;
+ for (let t = 0; t < angleEnd; t += 0.02) {
+ const x = BASE_CENTER_X + a * Math.cos(t) - currentPanX;
+ const y = BASE_CENTER_Y + b * Math.sin(t) - currentPanY;
+ ctx.lineTo(x, y);
+ }
+ ctx.strokeStyle = "rgba(100,100,255,0.3)";
+ ctx.closePath();
+ }
+ ctx.stroke();
+}
+
+function drawPlanet(key, x, y, size, color) {
+ const data = planetsData[key];
+
+ if (data.isComet) {
+ // Pour les comètes, la queue s'éloigne du soleil.
+ const sunX = BASE_CENTER_X - currentPanX;
+ const sunY = BASE_CENTER_Y - currentPanY;
+ const angle = Math.atan2(y - sunY, x - sunX);
+ 
+ const tailLength = key === 'neowise' ? 40 * currentZoomScale : 20 * currentZoomScale; 
+ const tailX = x - tailLength * Math.cos(angle);
+ const tailY = y - tailLength * Math.sin(angle);
+
+ ctx.beginPath();
+ ctx.moveTo(x, y);
+ ctx.lineTo(tailX, tailY);
+ ctx.strokeStyle = key === 'neowise' ? "rgba(255, 255, 0, 0.7)" : "rgba(50, 205, 50, 0.6)"; 
+ ctx.lineWidth = key === 'neowise' ? 3 : 2;
+ ctx.stroke();
+
+ ctx.fillStyle = key === 'neowise' ? 'rgba(255, 255, 0, 0.3)' : 'rgba(50, 205, 50, 0.3)';
+ ctx.beginPath();
+ ctx.arc(x, y, size + 10, 0, Math.PI * 2); 
+ ctx.fill();
+ }
+
+ ctx.fillStyle = color;
+ ctx.beginPath();
+ ctx.arc(x, y, size, 0, Math.PI * 2);
+ ctx.shadowColor = color;
+ ctx.shadowBlur = 8; 
+ ctx.fill();
+ ctx.shadowBlur = 0; 
+
+ if (key === 'terre') {
+ drawMoon(x, y);
+ }
+}
+
+function drawPlanetName(x, y, label) { 
+ // Changement de police ici
+ ctx.font = "12px 'Space Mono', Consolas"; 
+ ctx.fillStyle = "#00FF00"; 
+ ctx.textAlign = 'left'; 
+ 
+ let offset = 10;
+ if (label.includes('ATLAS') || label.includes('SOLEIL') || label.includes('NEOWISE')) {
+ offset = 20;
+ }
+ 
+ ctx.fillText(label, x + offset, y + 4); 
+}
+
+function drawMoon(earthX, earthY) {
+ const r = luneData.radius * currentZoomScale;
+ // Position de la lune
+ const x = earthX + r * Math.cos(theta.lune);
+ const y = earthY + r * Math.sin(theta.lune);
+
+ ctx.fillStyle = luneData.color;
+ ctx.beginPath();
+ ctx.arc(x, y, luneData.size, 0, Math.PI * 2);
+ ctx.fill();
+}
+
+function drawSun() {
+ const sunRadius = sunBaseRadius * currentZoomScale;
+ 
+ const sunX = BASE_CENTER_X - currentPanX;
+ const sunY = BASE_CENTER_Y - currentPanY;
+
+ const gradient = ctx.createRadialGradient(sunX, sunY, sunRadius * 0.5, sunX, sunY, sunRadius);
+ gradient.addColorStop(0, 'yellow');
+ gradient.addColorStop(1, 'red');
+
+ ctx.fillStyle = gradient;
+ ctx.beginPath();
+ ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2);
+ ctx.shadowColor = 'yellow';
+ ctx.shadowBlur = 20;
+ ctx.fill();
+ ctx.shadowBlur = 0; 
+ 
+ drawPlanetName(sunX, sunY, "SOLEIL"); 
+}
+
+
+// Main animation loop
+function draw() {
+ 
+ currentZoomScale = lerp(currentZoomScale, targetZoomScale, LERP_FACTOR);
+ 
+ // Le panning actif par suivi (panIsActive) est prioritaire sur le panning manuel
+ if (!isDragging) {
+ currentPanX = lerp(currentPanX, targetPanX, PAN_LERP_FACTOR);
+ currentPanY = lerp(currentPanY, targetPanY, PAN_LERP_FACTOR);
+ }
+
+ if (Math.abs(currentPanX - targetPanX) < 0.5 && Math.abs(currentPanY - targetPanY) < 0.5) {
+ if (!isDragging) {
+ currentPanX = targetPanX;
+ currentPanY = targetPanY;
+ }
+ }
+
+ ctx.fillStyle = 'black';
+ ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+ drawStars();
+
+ drawSun();
+
+ for (const key in planetsData) {
+ const data = planetsData[key];
+ const coords = getPlanetCoords(key); 
+ 
+ if (key === 'terre') {
+ terreOriginalX = coords.orbitalX;
+ terreOriginalY = coords.orbitalY;
+ }
+
+ if (panIsActive && data.isTarget) {
+ // Mise à jour de la cible de panning pour le suivi
+ targetPanX = coords.orbitalX;
+ targetPanY = coords.orbitalY;
+ }
+
+ drawOrbit(key, coords.a, coords.b);
+ drawPlanet(key, coords.x, coords.y, data.size, data.color);
+ drawTangent(key, coords.x, coords.y, coords.orbitalX, coords.orbitalY, coords.lineAngle);
+ drawPlanetName(coords.x, coords.y, data.label); 
+
+ if (running) {
+ if (key === 'atlas') {
+ theta[key] += 0.002 * globalSpeed; // Vitesse ajustée pour le passage
+ } else {
+ theta[key] += baseSpeed[key] * globalSpeed * (data.isComet ? 0.3 : 1.0); 
+ }
+ }
+ }
+
+ if (running) {
+ // Rotation de la Lune dans le sens horaire
+ theta.lune += baseSpeed.lune * globalSpeed * MOON_SPEED_MULTIPLIER;
+ }
+
+ requestAnimationFrame(draw);
+}
+
+// Function to center the camera on a planet
+function centerOnObject(key) {
+ const data = planetsData[key];
+ if (!data) return;
+
+ targetZoomScale = data.centerZoomScale || 1.0; 
+ currentZoomIndex = data.centerZoomIndex || 0;
+ zoomBtn.textContent = `ZOOM: ${zoomLevels[currentZoomIndex].name}`;
+ systemStatus.textContent = `ÉTAT DU SYSTÈME: ${data.label.toUpperCase()} SUIVI`;
+
+ for (let k in planetsData) {
+ planetsData[k].isTarget = (k === key);
+ }
+ panIsActive = true;
+ rogerSound.play();
+ updateInfoConsole(key); 
+}
+
+// Utility to manage wind sound state (ONLY for Atlas)
+function playWindSound() {
+ windSound.volume = 0.5; 
+ if (!windSoundPlayedOnce) {
+ windSound.play().then(() => {
+ windSoundPlayedOnce = true;
+ }).catch(e => {
+ windSoundPlayedOnce = true;
+ });
+ } else if (windSound.paused) {
+ windSound.play().catch(e => console.log("Wind sound playback error:", e));
+ }
+}
+function stopWindSound() {
+ if (!windSound.paused) {
+ windSound.pause();
+ windSound.currentTime = 0;
+ windSoundPlayedOnce = false; 
+ }
+}
+
+// --- Zoom par Molette de Souris ---
+canvas.addEventListener('wheel', (e) => {
+ e.preventDefault(); 
+ 
+ const zoomFactor = 1.1; 
+ let newTargetZoomScale = targetZoomScale;
+
+ if (e.deltaY < 0) {
+ // Zoom IN
+ newTargetZoomScale *= zoomFactor;
+ } else {
+ // Zoom OUT
+ newTargetZoomScale /= zoomFactor;
+ }
+ 
+ // Clamper la valeur de zoom entre une limite min et max
+ newTargetZoomScale = Math.max(0.1, Math.min(10.0, newTargetZoomScale));
+ 
+ // Mettre à jour la cible de zoom
+ targetZoomScale = newTargetZoomScale;
+ 
+ // Désactiver le suivi auto et réinitialiser l'index pour que le bouton corresponde
+ panIsActive = false;
+ for (let k in planetsData) planetsData[k].isTarget = false;
+ currentZoomIndex = 0;
+ zoomBtn.textContent = `ZOOM: PERSONNALISÉ`;
+ systemStatus.textContent = `ÉTAT DU SYSTÈME: VUE PERSONNALISÉE`;
+ updateInfoConsole(canvas.lastHitTarget);
+
+}, { passive: false });
+
+
+// --- Event Handlers ---
+toggleBtn.addEventListener('click', () => {
+ running = !running;
+ toggleBtn.textContent = running ? " ARRÊT" : " DÉMARRER";
+ updateInfoConsole(canvas.lastHitTarget);
+});
+speedBtn.addEventListener('click', () => {
+ currentSpeedIndex = (currentSpeedIndex + 1) % speedMultipliers.length;
+ globalSpeed = speedMultipliers[currentSpeedIndex];
+ speedBtn.textContent = `VITESSE ×${globalSpeed.toFixed(1)}`;
+ rogerSound.play();
+ updateInfoConsole(canvas.lastHitTarget);
+});
+zoomBtn.addEventListener('click', () => {
+ currentZoomIndex = (currentZoomIndex + 1) % zoomLevels.length;
+ targetZoomScale = zoomLevels[currentZoomIndex].scale;
+ zoomBtn.textContent = `ZOOM: ${zoomLevels[currentZoomIndex].name}`;
+ systemStatus.textContent = `ÉTAT DU SYSTÈME: ${zoomLevels[currentZoomIndex].status}`;
+ updateInfoConsole(canvas.lastHitTarget);
+ 
+ targetPanX = 0;
+ targetPanY = 0;
+ panIsActive = false;
+ for (let k in planetsData) planetsData[k].isTarget = false;
+ rogerSound.play();
+});
+resetPanBtn.addEventListener('click', () => {
+ targetPanX = 0;
+ targetPanY = 0;
+ currentPanX = 0; 
+ currentPanY = 0;
+ targetZoomScale = 1.0;
+ currentZoomIndex = 0;
+ zoomBtn.textContent = `ZOOM: INTÉRIEUR`;
+ systemStatus.textContent = `ÉTAT DU SYSTÈME: VUE INTÉRIEURE`;
+ panIsActive = false;
+ for (let k in planetsData) planetsData[k].isTarget = false;
+ rogerSound.play();
+});
+
+
+// --- Panning Manuel ---
+canvas.addEventListener('mousedown', (e) => {
+ // N'active pas le drag si on clique sur une planète ou le soleil
+ const rect = canvas.getBoundingClientRect();
+ const mouseX = e.clientX - rect.left;
+ const mouseY = e.clientY - rect.top;
+
+ const sunX = BASE_CENTER_X - currentPanX;
+ const sunY = BASE_CENTER_Y - currentPanY;
+ if (Math.hypot(mouseX - sunX, mouseY - sunY) < sunBaseRadius * currentZoomScale) return;
+
+ for (const key in planetsData) {
+ const data = planetsData[key];
+ const coords = getPlanetCoords(key);
+ const radius = data.size;
+ if (Math.hypot(mouseX - coords.x, mouseY - coords.y) < radius + 15) return;
+ }
+
+ isDragging = true;
+ canvas.classList.add('grabbing');
+ lastMouseX = e.clientX;
+ lastMouseY = e.clientY;
+ panIsActive = false; // Désactiver le suivi automatique
+ targetPanX = currentPanX; // Fixer la cible au point actuel
+ targetPanY = currentPanY;
+ updateInfoConsole();
+
+});
+
+canvas.addEventListener('mouseup', () => {
+ isDragging = false;
+ canvas.classList.remove('grabbing');
+ updateInfoConsole(canvas.lastHitTarget);
+});
+
+canvas.addEventListener('mouseout', () => {
+ if (isDragging) { // Terminer le drag si la souris quitte le canvas
+ isDragging = false;
+ canvas.classList.remove('grabbing');
+ }
+ stopWindSound();
+ updateInfoConsole(null);
+ canvas.lastHitTarget = null;
+ // Arrêter la narration à la sortie
+ if (synth.speaking) {
+ synth.cancel();
+ speechDisplay.removeAttribute('data-looping');
+ hideSpeechDisplay();
+ }
+});
+
+canvas.addEventListener('mousemove', (event) => {
+ const rect = canvas.getBoundingClientRect();
+ const mouseX = event.clientX - rect.left;
+ const mouseY = event.clientY - rect.top;
+ 
+ // Gérer le Panning manuel
+ if (isDragging) {
+ const dx = event.clientX - lastMouseX;
+ const dy = event.clientY - lastMouseY;
+ 
+ currentPanX -= dx / currentZoomScale; // Panning inversé et sensible au zoom
+ currentPanY -= dy / currentZoomScale;
+ 
+ // Mettre à jour la cible immédiatement pendant le drag
+ targetPanX = currentPanX; 
+ targetPanY = currentPanY;
+
+ lastMouseX = event.clientX;
+ lastMouseY = event.clientY;
+ return; // Ne pas vérifier les survolages pendant le drag
+ }
+
+ // Logic de Survol (Hover)
+ let hitTarget = null;
+ let minDistance = Infinity;
+
+ const sunRadius = sunBaseRadius * currentZoomScale;
+ const sunX = BASE_CENTER_X - currentPanX;
+ const sunY = BASE_CENTER_Y - currentPanY;
+ const distToSun = Math.hypot(mouseX - sunX, mouseY - sunY);
+ 
+ if (distToSun < sunRadius) {
+ hitTarget = 'sun';
+ minDistance = distToSun;
+ }
+
+ for (const key in planetsData) {
+ const data = planetsData[key];
+ const coords = getPlanetCoords(key);
+ const radius = data.size;
+ const dist = Math.hypot(mouseX - coords.x, mouseY - coords.y);
+
+ if (dist < radius + 15 && dist < minDistance) { 
+ hitTarget = key;
+ minDistance = dist;
+ }
+ }
+
+ // Wind Sound Logic (Only for Atlas)
+ if (hitTarget === 'atlas') {
+ playWindSound();
+ } else {
+ stopWindSound();
+ }
+
+
+ // Update console and speech
+ if (hitTarget && hitTarget !== canvas.lastHitTarget) {
+ updateInfoConsole(hitTarget);
+ if (hitTarget === 'sun') {
+ speakGreeting(); // Lancement de la boucle du Soleil
+ } else if (hitTarget !== 'terre' || !terreIsTransiting) { 
+ speakData(hitTarget);
+ }
+ canvas.lastHitTarget = hitTarget;
+ } else if (!hitTarget && canvas.lastHitTarget) {
+ updateInfoConsole(null);
+ canvas.lastHitTarget = null;
+ if (synth.speaking) {
+ synth.cancel();
+ speechDisplay.removeAttribute('data-looping');
+ hideSpeechDisplay();
+ }
+ }
+});
+
+// Click event for centering and zooming
+canvas.addEventListener('click', (event) => {
+ // Ne pas centrer si un drag vient d'avoir lieu
+ if (Math.hypot(currentPanX - targetPanX, currentPanY - targetPanY) > 5) return; 
+
+ const rect = canvas.getBoundingClientRect();
+ const mouseX = event.clientX - rect.left;
+ const mouseY = event.clientY - rect.top;
+
+ for (const key in planetsData) {
+ const data = planetsData[key];
+ const coords = getPlanetCoords(key);
+ const radius = data.size;
+ const dist = Math.hypot(mouseX - coords.x, mouseY - coords.y);
+
+ if (dist < radius + 15 && (data.isComet || key === 'terre')) { 
+ centerOnObject(key);
+ return; 
+ }
+ }
+});
+
+
+// Initialize simulation
+initializeStars();
+updateInfoConsole(null); 
+
+// minimal rest omitted for brevity
+
+</script>
+</body>
+</html>
